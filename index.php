@@ -42,13 +42,10 @@ function primeSum($l, $r)
 $l = $_GET['first-number'] ?? '';
 $r = $_GET['second-number'] ?? '';
 
-// echo 'Inicio: ' . $l . '<br>';
-// echo 'Fim: ' . $r . '<br>';
-// echo 'Soma de números primos no intervalo: ' . primeSum($l, $r) . '<br><br><br>';
-
 /* Questão 2 */
 $tree = [12, 13, 15, 19, 24, 28, 39, 57, 59, 63, 67, 69, 74];
 
+// Busca key do valor passado
 function binarySearch(array $tree, $item)
 {
 
@@ -77,15 +74,8 @@ function binarySearch(array $tree, $item)
 
 $element = $_GET['element'] ?? '';
 
-// echo 'Array: [12, 13, 15, 19, 24, 28, 39, 57, 59, 63, 67, 69, 74]' . '<br>';
-// echo 'Elemento: ' . $element . '<br>';
-// echo 'ID (key) elemento: ' . binarySearch($tree, 69);
-
-/* Questão 3 */
-// echo '<h1>Questão 3</h1>';
-// echo '<a href="http://localhost/Command.php" style="text-decoration: none; font-size: 25px;">Clique para ver a saída...</a>';
-
 /* Questão 4 */
+// Limpa campos imputados
 function cleanInputs($login, $senha)
 {
     // Função para limpar string, não são permitidos símbolos
@@ -103,9 +93,6 @@ $login = $_GET['login'] ?? '';
 $senha = $_GET['senha'] ?? '';
 
 // Um teste de or '1='1;
-
-// echo '<b>Login Inputado:</b> ' . $login . '<br>' . '<b>Senha Inputada:</b> ' . $senha . '<br><br>';
-// echo cleanInputs($login, $senha);
 ?>
 
 <!doctype html>
@@ -250,14 +237,65 @@ $senha = $_GET['senha'] ?? '';
 
         <?php if (!empty($login) && !empty($senha)) { ?>
             <span class="mt-3">
-                <b>Login Inputado:</b> <?php echo $login; ?><br>
-                <b>Senha Inputada:</b> <?php echo $senha; ?><br>
+                <b>Login Imputado:</b> <?php echo $login; ?><br>
+                <b>Senha Imputada:</b> <?php echo $senha; ?><br>
             </span>
 
             <span class="mt-3">
                 <?php echo cleanInputs($login, $senha); ?>
             </span>
         <?php } ?>
+    </div>
+
+    <div class="row mt-5 mb-5">
+
+        <h4>Questão 5</h4>
+
+        <h6 class="mt-3">Configurando RabbitMQ</h6>
+
+        <p class="mt-3">
+            Para realizar o teste da questão 5 é necessário ter o <code>Docker</code> em seu computador para realizar a instalção do <code>RabbitMQ</code>.<br>
+            Rode o seguinte comando no seu terminal: <code>docker run -d --hostname my-rabbit --name rabbitmq -p 15672:15672 -p 5672:5672 rabbitmq:management-alpine</code>
+        </p>
+
+        <p>
+            O <code>RabbitMQ</code> possui uma interface para gerenciamento, você pode acessar no endereço
+            <a href="http://localhost:15672" target="_blank">http://localhost:15672</a>. Use <code>guest</code> como usuário e senha para realizar o login.
+        </p>
+
+        <h6 class="mt-3">Configurando PHP</h6>
+
+        <p class="mt-3">
+            Primeiro é necessário se certificar que o seu <code>PHP</code> possui as seguintes extensões <code>ext-bcmath, ext-sockets</code>.<br>
+            Caso seja necessário habilita-las, basta descomentar a chamanda das mesmas no seu arquivo <code>php.ini</code>
+        </p>
+
+        <p>
+            Após a instalação das extensões é necessário instalar a biblioteca utilizada para trabalhar com <code>AMQP</code> que é o protocolo utilizado pelo <code>RabbitMQ</code>.<br>
+            Rode o seguinte comando no seu terminal: <code>composer require php-amqplib/php-amqplib</code>
+        </p>
+
+        <h6 class="mt-3">Testando o Script</h6>
+
+        <p class="mt-3">
+            O script de envio de mensagem foi implementado no arquivo <code>sender</code>.<br>
+            Para executar o script, rode o seguinte comando no seu terminal: <code>php sender.php</code>
+        </p>
+
+        <p>
+            Para ver a mensagem enviada, acesse o gerenciador do  <code>RabbitMQ</code> no endereço
+            <a href="http://localhost:15672/#/queues" target="_blank">http://localhost:15672/#/queues</a>
+        </p>
+
+        <p>
+            O script de processamento e consumo de mensagem foi implementado no arquivo <code>consumer</code>.<br>
+            Para executar o script, rode o seguinte comando no seu terminal: <code>php consumer.php</code>
+        </p>
+
+        <p>
+            Para ver se a mensagem foi consumida e não está mais na fila, acesse o gerenciador do  <code>RabbitMQ</code> no endereço
+            <a href="http://localhost:15672/#/queues" target="_blank">http://localhost:15672/#/queues</a>
+        </p>
     </div>
 </div>
 
