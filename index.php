@@ -75,7 +75,7 @@ function binarySearch(array $tree, $item)
     return null;
 }
 
-// $element = 69;
+$element = $_GET['element'] ?? '';
 
 // echo 'Array: [12, 13, 15, 19, 24, 28, 39, 57, 59, 63, 67, 69, 74]' . '<br>';
 // echo 'Elemento: ' . $element . '<br>';
@@ -99,8 +99,10 @@ function cleanInputs($login, $senha)
     return $cleanInputs;
 }
 
-$login = "Um teste de or '1='1;";
-$senha = "Um teste de or '1='1;";
+$login = $_GET['login'] ?? '';
+$senha = $_GET['senha'] ?? '';
+
+// Um teste de or '1='1;
 
 // echo '<b>Login Inputado:</b> ' . $login . '<br>' . '<b>Senha Inputada:</b> ' . $senha . '<br><br>';
 // echo cleanInputs($login, $senha);
@@ -126,6 +128,21 @@ $senha = "Um teste de or '1='1;";
 
         .d-flex {
             display: flex;
+        }
+
+        code {
+            font-size: 1em !important;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            font-weight: 600;
+        }
+
+        a:hover {
+            opacity: 0.7;
+            color: inherit;
         }
     </style>
 </head>
@@ -153,6 +170,7 @@ $senha = "Um teste de or '1='1;";
 
             <div class="col-md-2 mt-3 ms-4" style="padding-top: 30px;">
                 <button type="submit" class="btn btn-primary">Enviar</button>
+                <button type="reset" class="btn btn-success clean-page">Limpar</button>
             </div>
         </form>
 
@@ -187,6 +205,59 @@ $senha = "Um teste de or '1='1;";
                 <option value="74">74</option>
             </select>
         </div>
+
+        <div class="col-md-2 mt-2 ms-2">
+            <button type="reset" class="btn btn-success clean-page">Limpar</button>
+        </div>
+
+        <?php if (!empty($element)) { ?>
+            <span class="mt-3"><b>Elemento:</b> <?php echo $element; ?></span>
+            <span class="mt-3"><b>ID (key) Elemento:</b> <?php echo binarySearch($tree, $element); ?></span>
+        <?php } ?>
+    </div>
+
+    <div class="row mt-5">
+
+        <h4>Questão 3</h4>
+
+        <p class="mt-3">
+            Implementação realizada na classe <code>Command</code>.<br>
+            <a href="http://localhost/Command.php" target="_blank">Clique aqui para ver a saída...</a>
+        </p>
+    </div>
+
+    <div class="row mt-5">
+
+        <h4>Questão 4</h4>
+
+        <form class="d-flex" action="/index.php" method="get">
+
+            <div class="col-md-2 mt-3">
+                <label for="login" class="form-label">Login</label>
+                <input type="text" class="form-control" id="login" name="login" placeholder="Login" required>
+            </div>
+
+            <div class="col-md-2 mt-3 ms-4">
+                <label for="senha" class="form-label">Senha</label>
+                <input type="text" class="form-control" id="senha" name="senha" placeholder="Senha" required>
+            </div>
+
+            <div class="col-md-2 mt-3 ms-4" style="padding-top: 30px;">
+                <button type="submit" class="btn btn-primary">Enviar</button>
+                <button type="reset" class="btn btn-success clean-page">Limpar</button>
+            </div>
+        </form>
+
+        <?php if (!empty($login) && !empty($senha)) { ?>
+            <span class="mt-3">
+                <b>Login Inputado:</b> <?php echo $login; ?><br>
+                <b>Senha Inputada:</b> <?php echo $senha; ?><br>
+            </span>
+
+            <span class="mt-3">
+                <?php echo cleanInputs($login, $senha); ?>
+            </span>
+        <?php } ?>
     </div>
 </div>
 
@@ -203,8 +274,12 @@ $senha = "Um teste de or '1='1;";
             let element = $("#array-element option:selected").val();
 
             if (element) {
-                alert(element);
+                window.location.href = 'http://localhost/?element=' + element;
             }
+        });
+
+        $('.clean-page').click(function () {
+            window.location.href = 'http://localhost/';
         });
     });
 </script>
