@@ -1,0 +1,6 @@
+# Configurações IDE
+/.idea
+
+# Configurações Composer
+/vendor
+composer.lock
